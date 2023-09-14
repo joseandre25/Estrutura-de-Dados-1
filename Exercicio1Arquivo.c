@@ -22,7 +22,7 @@ int main() {
         if (c == 32) {
             qtdEsp++;
         }
-        if (c == '\t') {
+        if (c == 9) {
             qtdTab++;
         }
         if (c == '\n') {
