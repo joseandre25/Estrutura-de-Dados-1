@@ -11,7 +11,7 @@ int main()
     printf("Valor: %d\n", numero);
     printf("Endereço: %p\n", &numero);
     printf("Ponteiro: %p\n", ptr);
-    printf("Ponteiro pra ponteiro: %p\n", ptr2);
+    //printf("Ponteiro pra ponteiro: %p\n", ptr2);
 
     return 0;
 }
