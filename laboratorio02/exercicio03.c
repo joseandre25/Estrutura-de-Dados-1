@@ -1,33 +1,63 @@
-/*Seja pvetcar um vetor não ordenado contendo valores do tipo char; 
-ptammax, um valor inteiro indicando a quantidade de elementos alocados em pvetcar 
-e pqtde, um valor inteiro indicando a quantidade atual de elementos em pvetcar. 
-Escreva as funções solicitadas abaixo considerando que pvetcar, ptammax e pqtde
-sejam parâmetros de entrada das mesmas:
-a. Faça uma função que receba um caracter e o inclua na primeira posição disponível de pvetcar;
-b. Faça uma função que receba um caracter e o exclua de pvetcar;*/
+#include <stdio.h>
+#include <stdlib.h>
 
-#include <stdio.h> 
-
-void incluiChar(char pvetcar, int ptammax, int pqtde){
-
-    char pvetcar[ptammax];
-
-    printf("char a ser inserido: ");
-    char c;
-    scanf(" %c", &c);
+// Função para inserir um caractere no vetor
+void InserirCaracter(char* pvetcar, int* ptammax, int* pqtde, char caracter) {
+    // Verifique se há espaço disponível no vetor
+    if (*pqtde < *ptammax) {
+        pvetcar[*pqtde] = caracter; // Insere o caractere na primeira posição disponível
+        (*pqtde)++; // Atualiza a quantidade atual de elementos
+    } else {
+        printf("O vetor está cheio. Não é possível inserir o caractere.\n");
+    }
 }
 
-int main()
-{
-    int ptammax, pqtde;
-
-    scanf("%d", &ptammax);
-    char pvetcar[ptammax];
-
-    for (int i = 0; i < ptammax; i++)
-    {
-        scanf(" %c", &pvetcar[i]);
+// Função para excluir um caractere do vetor
+void ExcluirCaracter(char* pvetcar, int* pqtde, char caracter) {
+    int encontrado = 0;
+    for (int i = 0; i < *pqtde; i++) {
+        if (pvetcar[i] == caracter) {
+            // Desloca os elementos restantes para preencher a lacuna
+            for (int j = i; j < *pqtde - 1; j++) {
+                pvetcar[j] = pvetcar[j + 1];
+            }
+            (*pqtde)--;
+            encontrado = 1;
+            break;
+        }
     }
-    
+
+    if (encontrado) {
+        printf("Caractere '%c' removido do vetor.\n", caracter);
+    } else {
+        printf("Caractere '%c' não encontrado no vetor.\n", caracter);
+    }
+}
+
+int main() {
+    int tammax = 10;
+    int qtde = 0;
+    char* vetor = (char*)malloc(tammax * sizeof(char));
+
+    InserirCaracter(vetor, &tammax, &qtde, 'A');
+    InserirCaracter(vetor, &tammax, &qtde, 'B');
+    InserirCaracter(vetor, &tammax, &qtde, 'C');
+
+    printf("Vetor: ");
+    for (int i = 0; i < qtde; i++) {
+        printf("%c ", vetor[i]);
+    }
+    printf("\n");
+
+    ExcluirCaracter(vetor, &qtde, 'B');
+
+    printf("Vetor após exclusão: ");
+    for (int i = 0; i < qtde; i++) {
+        printf("%c ", vetor[i]);
+    }
+    printf("\n");
+
+    free(vetor);
+
     return 0;
 }
