@@ -5,6 +5,7 @@
 // Perfomance:
 // - Melhor Caso: O(N²);
 // - Pior Caso: O(N²);
+// Estável: não altera a ordem de chaves iguais
 // Ineficiente para grandes conjuntos de dados
 
 #include <stdio.h>
